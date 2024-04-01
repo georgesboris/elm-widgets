@@ -29,6 +29,7 @@ module W.Skeleton exposing
 import Html as H
 import Html.Attributes as HA
 import W.Internal.Helpers as WH
+import W.Theme
 
 
 
@@ -127,15 +128,7 @@ noAttr =
 -- Main
 
 
-{-|
-
-    -- horizontal divider
-    W.Divider.view [] []
-
-    -- horizontal divider with a centralized label
-    W.Dividier.view [] [ H.text "divide, not conquer" ]
-
--}
+{-| -}
 view : List (Attribute msg) -> H.Html msg
 view attrs_ =
     let
@@ -145,10 +138,12 @@ view attrs_ =
     in
     H.div
         (attrs.htmlAttributes
-            ++ [ HA.style "border-radius" attrs.borderRadius
-               , HA.style "width" attrs.width
-               , HA.style "height" attrs.height
-               , HA.class "ew-bg-base-aux/30"
+            ++ [ W.Theme.styleList
+                    [ ( "border-radius", attrs.borderRadius )
+                    , ( "width", attrs.width )
+                    , ( "height", attrs.height )
+                    , ( "background", W.Theme.base.tint )
+                    ]
                , HA.classList [ ( "ew-animate-pulse", attrs.useAnimation ) ]
                ]
         )

@@ -40,8 +40,8 @@ module W.Text exposing
 
 import Html as H
 import Html.Attributes as HA
-import Theme
 import W.Internal.Helpers as WH
+import W.Theme
 
 
 
@@ -74,7 +74,7 @@ defaultAttrs =
     , class = ""
     , fontSize = "ew-text-base"
     , textAlign = "ew-text-left"
-    , color = Theme.baseForeground
+    , color = W.Theme.base.text
     , htmlAttributes = []
     }
 
@@ -92,7 +92,7 @@ inline =
 {-| -}
 aux : Attribute msg
 aux =
-    Attribute (\attrs -> { attrs | color = Theme.baseAux })
+    Attribute (\attrs -> { attrs | color = W.Theme.base.textSubtle })
 
 
 {-| -}

@@ -6,63 +6,96 @@ import Html.Attributes as HA
 import Theme
 import W.Heading
 import W.Text
+import W.Container
 
 
 chapter_ : Chapter x
 chapter_ =
-    chapter "Typography"
+    chapter "Heading & Text"
         |> renderComponentList
-            [ ( "Font Sizes"
+            [ ( "W.Heading"
               , H.div []
                     [ W.Heading.view
                         [ W.Heading.extraLarge ]
-                        [ H.text "I'm a really large title" ]
-                    , W.Text.view
-                        [ W.Text.extraLarge, W.Text.aux ]
-                        [ H.text "I'm a really large text" ]
+                        [ H.text "Heading XL" ]
                     , W.Heading.view
-                        [ W.Heading.h2
-                        , W.Heading.large
-                        ]
-                        [ H.text "I'm a large title" ]
-                    , W.Text.view
-                        [ W.Text.large, W.Text.aux ]
-                        [ H.text "I'm a large text" ]
+                        [ W.Heading.large ]
+                        [ H.text "Heading L" ]
                     , W.Heading.view []
-                        [ H.text "I'm the base title" ]
-                    , W.Text.view [ W.Text.aux ]
-                        [ H.text "I'm the base text" ]
+                        [ H.text "Heading" ]
                     , W.Heading.view
                         [ W.Heading.small ]
-                        [ H.text "I'm a small title" ]
-                    , W.Text.view
-                        [ W.Text.small, W.Text.aux ]
-                        [ H.text "I'm a small text" ]
+                        [ H.text "Heading S" ]
+                    , W.Heading.view
+                        [ W.Heading.extraSmall ]
+                        [ H.text "Heading XS" ]
                     ]
               )
-            , ( "Font Sizes"
+            , ( "W.Text"
               , H.div []
                     [ W.Text.view
                         [ W.Text.extraLarge, W.Text.aux ]
-                        [ H.text "I'm a large text" ]
+                        [ H.text "Text XL" ]
                     , W.Text.view
                         [ W.Text.large, W.Text.aux ]
-                        [ H.text "I'm a large text" ]
+                        [ H.text "Text L" ]
                     , W.Text.view [ W.Text.aux ]
-                        [ H.text "I'm the base text" ]
+                        [ H.text "Text" ]
                     , W.Text.view
                         [ W.Text.small, W.Text.aux ]
-                        [ H.text "I'm a small text" ]
+                        [ H.text "Text S" ]
+                    , W.Text.view
+                        [ W.Text.extraSmall, W.Text.aux ]
+                        [ H.text "Text XS" ]
                     ]
               )
-            , ( "Large"
-              , W.Heading.view
-                    [ W.Heading.large ]
-                    [ H.text "I'm a title" ]
-              )
-            , ( "Small"
-              , W.Heading.view
-                    [ W.Heading.small ]
-                    [ H.text "I'm a title" ]
-              )
+            , ( "Compositions"
+              , H.div []
+                    [ W.Container.view
+                        [ W.Container.padBottom_4 ]
+                        [ W.Heading.view
+                            [ W.Heading.extraLarge ]
+                            [ H.text "I'm a XL title" ]
+                        , W.Text.view
+                            [ W.Text.extraLarge, W.Text.aux ]
+                            [ H.text "I'm a extra large text" ]
+                        ]
+                       , W.Container.view
+                            [ W.Container.padBottom_4 ]
+                            [ W.Heading.view
+                                [ W.Heading.h2
+                                , W.Heading.large
+                                ]
+                                [ H.text "I'm a large title" ]
+                            , W.Text.view
+                                [ W.Text.large, W.Text.aux ]
+                                [ H.text "I'm a large text" ]
+                            ]
+                       , W.Container.view
+                            [ W.Container.padBottom_4 ]
+                            [ W.Heading.view []
+                                [ H.text "I'm the base title" ]
+                            , W.Text.view [ W.Text.aux ]
+                                [ H.text "I'm the base text" ]
+                            ]
+                       , W.Container.view
+                            [ W.Container.padBottom_4 ]
+                            [ W.Heading.view
+                                [ W.Heading.small ]
+                                [ H.text "I'm a small title" ]
+                            , W.Text.view
+                                [ W.Text.small, W.Text.aux ]
+                                [ H.text "I'm a small text" ]
+                            ]
+                       , W.Container.view
+                            [ W.Container.padBottom_4 ]
+                            [ W.Heading.view
+                                [ W.Heading.extraSmall ]
+                                [ H.text "I'm a extra small title" ]
+                            , W.Text.view
+                                [ W.Text.extraSmall, W.Text.aux ]
+                                [ H.text "I'm a extra small text" ]
+                            ]
+                    ]
+                )
             ]

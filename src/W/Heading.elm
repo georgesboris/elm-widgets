@@ -1,6 +1,6 @@
 module W.Heading exposing
     ( view
-    , primary, secondary, neutral, color
+    , primary, secondary, color
     , extraSmall, small, large, extraLarge
     , h2, h3, h4, h5, h6
     , alignLeft, alignRight, alignCenter
@@ -40,8 +40,8 @@ module W.Heading exposing
 
 import Html as H
 import Html.Attributes as HA
-import Theme
 import W.Internal.Helpers as WH
+import W.Theme
 
 
 
@@ -72,9 +72,9 @@ defaultAttrs : Attributes msg
 defaultAttrs =
     { element = "h1"
     , fontSize = "ew-text-2xl"
-    , fontFamily = "ew-font-heading"
     , textAlign = "ew-text-left"
-    , color = Theme.baseForeground
+    , fontFamily = W.Theme.font.heading
+    , color = W.Theme.base.text
     , htmlAttributes = []
     }
 
@@ -164,19 +164,13 @@ color v =
 {-| -}
 primary : Attribute msg
 primary =
-    Attribute (\attrs -> { attrs | color = Theme.primaryForeground })
+    Attribute (\attrs -> { attrs | color = W.Theme.primary.text })
 
 
 {-| -}
 secondary : Attribute msg
 secondary =
-    Attribute (\attrs -> { attrs | color = Theme.secondaryForeground })
-
-
-{-| -}
-neutral : Attribute msg
-neutral =
-    Attribute (\attrs -> { attrs | color = Theme.neutralForeground })
+    Attribute (\attrs -> { attrs | color = W.Theme.secondary.text })
 
 
 {-| -}

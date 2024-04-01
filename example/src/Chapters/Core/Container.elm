@@ -2,7 +2,7 @@ module Chapters.Core.Container exposing (..)
 
 import ElmBook.Chapter exposing (Chapter, chapter, renderWithComponentList, withComponentList)
 import Html as H
-import Theme
+import W.Theme
 import W.Container
 
 
@@ -10,7 +10,7 @@ square : H.Html msg
 square =
     W.Container.view
         [ W.Container.pad_4
-        , W.Container.background Theme.baseAux
+        , W.Container.background W.Theme.base.solid
         , W.Container.extraRounded
         ]
         []
@@ -25,7 +25,7 @@ chapter_ =
                     [ W.Container.pad_8
                     , W.Container.gap_2
                     , W.Container.horizontal
-                    , W.Container.background (Theme.baseAuxWithAlpha 0.1)
+                    , W.Container.background (W.Theme.base.tint)
                     ]
                     (List.repeat 3 square)
               )
@@ -35,7 +35,7 @@ chapter_ =
                     , W.Container.gap_2
                     , W.Container.horizontal
                     , W.Container.spaceBetween
-                    , W.Container.background (Theme.baseAuxWithAlpha 0.1)
+                    , W.Container.background (W.Theme.base.tint)
                     ]
                     [ square
                     , square
@@ -48,7 +48,7 @@ chapter_ =
                     , W.Container.gap_2
                     , W.Container.horizontal
                     , W.Container.spaceAround
-                    , W.Container.background (Theme.baseAuxWithAlpha 0.1)
+                    , W.Container.background (W.Theme.base.tint)
                     ]
                     [ square
                     , square
@@ -59,7 +59,7 @@ chapter_ =
               , W.Container.view
                     [ W.Container.pad_8
                     , W.Container.gap_2
-                    , W.Container.background (Theme.baseAuxWithAlpha 0.1)
+                    , W.Container.background (W.Theme.base.tint)
                     , W.Container.alignCenterX
                     , W.Container.alignCenterY
                     ]
@@ -72,7 +72,7 @@ chapter_ =
               , W.Container.view
                     [ W.Container.pad_8
                     , W.Container.gap_2
-                    , W.Container.background (Theme.baseAuxWithAlpha 0.1)
+                    , W.Container.background (W.Theme.base.tint)
                     , W.Container.alignRight
                     , W.Container.alignCenterY
                     ]
@@ -85,7 +85,7 @@ chapter_ =
               , W.Container.view
                     [ W.Container.pad_8
                     , W.Container.gap_2
-                    , W.Container.background (Theme.baseAuxWithAlpha 0.1)
+                    , W.Container.background (W.Theme.base.tint)
                     , W.Container.alignCenterX
                     , W.Container.alignCenterY
                     , W.Container.largeScreen [ W.Container.horizontal ]
@@ -98,7 +98,7 @@ chapter_ =
             , ( "Using the card attribute to set background, borders and shadows at the same time"
               , W.Container.view
                     [ W.Container.pad_8
-                    , W.Container.background (Theme.baseAuxWithAlpha 0.1)
+                    , W.Container.background (W.Theme.base.tint)
                     , W.Container.alignCenterX
                     , W.Container.alignCenterY
                     ]

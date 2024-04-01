@@ -22,7 +22,7 @@ module W.Divider exposing
 
 import Html as H
 import Html.Attributes as HA
-import Theme
+import W.Theme
 
 
 
@@ -43,7 +43,7 @@ type alias Attributes =
 
 defaultAttrs : Attributes
 defaultAttrs =
-    { color = Theme.baseAuxWithAlpha 0.2
+    { color = W.Theme.base.border
     , vertical = False
     , margins = 0
     }
@@ -61,7 +61,7 @@ applyAttrs attrs =
 {-| -}
 light : Attribute msg
 light =
-    Attribute (\attrs -> { attrs | color = Theme.baseAuxWithAlpha 0.07 })
+    Attribute (\attrs -> { attrs | color = W.Theme.base.borderSubtle })
 
 
 {-| -}
@@ -98,7 +98,7 @@ noAttr =
     W.Divider.view [] []
 
     -- horizontal divider with a centralized label
-    W.Dividier.view [] [ H.text "divide, not conquer" ]
+    W.Divider.view [] [ H.text "divide, not conquer" ]
 
 -}
 view : List (Attribute msg) -> List (H.Html msg) -> H.Html msg
@@ -115,7 +115,7 @@ view attrs_ children =
                 [ ( "ew-border-t-2", not attrs.vertical )
                 , ( "ew-border-l-2", attrs.vertical )
                 ]
-            , Theme.stylesIf
+            , W.Theme.styleListIf
                 [ ( "border-color", attrs.color, True )
                 , ( "margin", "0 " ++ String.fromInt attrs.margins ++ "px", attrs.vertical )
                 , ( "margin", String.fromInt attrs.margins ++ "px 0", not attrs.vertical )
@@ -134,13 +134,13 @@ view attrs_ children =
                 [ ( "before:ew-h-0.5 after:ew-h-0.5", not attrs.vertical )
                 , ( "ew-flex-col before:ew-w-0.5 after:ew-w-0.5", attrs.vertical )
                 ]
-            , Theme.stylesIf
+            , W.Theme.styleListIf
                 [ ( "color", attrs.color, True )
                 , ( "width", String.fromInt (attrs.margins * 2 + 2) ++ "px", attrs.vertical )
                 , ( "height", String.fromInt (attrs.margins * 2 + 2) ++ "px", not attrs.vertical )
                 ]
             ]
             [ H.span
-                [ HA.class "ew-text-base-fg" ]
+                [ W.Theme.styleList [ ( "color", W.Theme.base.text ) ] ]
                 children
             ]

@@ -41,6 +41,7 @@ If you don't want to manage your modal open state at all, use the toggable versi
 import Html as H
 import Html.Attributes as HA
 import Html.Events as HE
+import W.Theme
 
 
 
@@ -260,7 +261,8 @@ view_ attrs_ props =
                         [ H.div
                             (attrs.htmlAttributes
                                 ++ [ HA.class "ew-relative ew-overflow-visible ew-pointer-events-auto"
-                                   , HA.class "ew-w-full ew-bg-base-bg ew-shadow-lg ew-rounded-lg"
+                                   , HA.class "ew-w-full ew-shadow-lg ew-rounded-lg"
+                                   , W.Theme.styleList [ ( "background", W.Theme.base.bg ) ]
                                    ]
                             )
                             (toContent props)

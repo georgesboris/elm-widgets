@@ -5,6 +5,7 @@ import ElmBook.Chapter exposing (Chapter, chapter, renderComponentList)
 import Html as H
 import UI
 import W.Message
+import W.Theme.Colors
 
 
 chapter_ : Chapter x
@@ -17,7 +18,7 @@ chapter_ =
              , ( [ W.Message.success ], "Success" )
              , ( [ W.Message.warning ], "Warning" )
              , ( [ W.Message.danger ], "Danger" )
-             , ( [ W.Message.color "purple" ], "Custom" )
+             , ( [ W.Message.theme W.Theme.Colors.purple ], "Custom" )
              ]
                 |> List.map
                     (\( attrs, label ) ->

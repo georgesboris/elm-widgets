@@ -41,6 +41,7 @@ import Theme
 import W.Docs.InputCode
 import W.Docs.Skeleton
 import W.Styles
+import W.Theme
 
 
 type alias SharedState =
@@ -79,13 +80,9 @@ main =
             ]
         |> withThemeOptions
             [ ElmBook.ThemeOptions.subtitle "Stateless & Tasteful"
-            , ElmBook.ThemeOptions.backgroundGradient "#0087cf" Theme.primaryBackground
+            , ElmBook.ThemeOptions.backgroundGradient W.Theme.primary.solid W.Theme.primary.borderHover
             , ElmBook.ThemeOptions.globals
-                [ Theme.globalProviderWithDarkMode
-                    { light = Theme.lightTheme
-                    , dark = Theme.darkTheme
-                    , strategy = Theme.classStrategy "elm-book-dark-mode"
-                    }
+                [ W.Theme.global (W.Theme.lightWithDarkModeTheme (W.Theme.classStrategy "elm-book-dark-mode"))
                 , W.Styles.globalStyles
                 , H.node "style" [] [ H.text "@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&family=Patrick+Hand&family=Press+Start+2P&family=Raleway&display=swap')" ]
                 ]

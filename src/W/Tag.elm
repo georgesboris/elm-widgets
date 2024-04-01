@@ -29,7 +29,7 @@ module W.Tag exposing
 import Html as H
 import Html.Attributes as HA
 import Html.Events as HE
-import Theme
+import W.Theme
 
 
 
@@ -43,6 +43,7 @@ type Attribute msg
 
 type alias Attributes msg =
     { htmlAttributes : List (H.Attribute msg)
+    , background : String
     , color : String
     , size : Size
     , href : Maybe String
@@ -64,7 +65,8 @@ applyAttrs attrs =
 defaultAttrs : Attributes msg
 defaultAttrs =
     { htmlAttributes = []
-    , color = Theme.neutralForeground
+    , background = W.Theme.base.tint
+    , color = W.Theme.base.solid
     , size = Medium
     , href = Nothing
     , onClick = Nothing
@@ -121,9 +123,9 @@ href v =
 
 
 {-| -}
-color : String -> Attribute msg
+color : { background : String, text : String } -> Attribute msg
 color v =
-    Attribute <| \attrs -> { attrs | color = v }
+    Attribute <| \attrs -> { attrs | background = v.background, color = v.text }
 
 
 {-| -}
@@ -132,7 +134,8 @@ primary =
     Attribute <|
         \attrs ->
             { attrs
-                | color = Theme.primaryForeground
+                | color = W.Theme.primary.textSubtle
+                , background = W.Theme.primary.tint
             }
 
 
@@ -142,7 +145,8 @@ secondary =
     Attribute <|
         \attrs ->
             { attrs
-                | color = Theme.secondaryForeground
+                | color = W.Theme.secondary.textSubtle
+                , background = W.Theme.secondary.tint
             }
 
 
@@ -152,7 +156,8 @@ success =
     Attribute <|
         \attrs ->
             { attrs
-                | color = Theme.successForeground
+                | color = W.Theme.success.textSubtle
+                , background = W.Theme.success.tint
             }
 
 
@@ -162,7 +167,8 @@ warning =
     Attribute <|
         \attrs ->
             { attrs
-                | color = Theme.warningForeground
+                | color = W.Theme.warning.textSubtle
+                , background = W.Theme.warning.tint
             }
 
 
@@ -172,7 +178,8 @@ danger =
     Attribute <|
         \attrs ->
             { attrs
-                | color = Theme.dangerForeground
+                | color = W.Theme.danger.textSubtle
+                , background = W.Theme.danger.tint
             }
 
 
@@ -208,8 +215,11 @@ view attrs_ children =
             attrs.htmlAttributes
                 ++ [ HA.class "ew-m-0 ew-box-border ew-relative ew-inline-flex ew-items-center ew-leading-none ew-font-text ew-font-medium ew-tracking-wider"
                    , HA.class "ew-rounded-full ew-border-solid ew-border-current ew-border-0"
-                   , HA.class "before:ew-content-[''] before:ew-absolute before:ew-inset-0 before:ew-rounded-full before:ew-bg-current before:ew-opacity-10"
                    , HA.style "color" attrs.color
+                   , W.Theme.styleList
+                        [ ( "color", attrs.color )
+                        , ( "background", attrs.background )
+                        ]
                    , case attrs.size of
                         Large ->
                             HA.class "ew-h-8 ew-px-4 ew-text-base"

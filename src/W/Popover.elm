@@ -40,7 +40,7 @@ module W.Popover exposing
 
 import Html as H
 import Html.Attributes as HA
-import Theme
+import W.Theme
 
 
 
@@ -75,7 +75,7 @@ type alias Attributes msg =
     , over : Bool
     , persistent : Bool
     , isOpen : Maybe Bool
-    , widthAttr : ( String, String )
+    , widthAttr : ( String, String, Bool )
     , showOnHover : Bool
     , unstyled : Bool
     , htmlAttributes : List (H.Attribute msg)
@@ -95,7 +95,7 @@ defaultAttrs =
     , over = False
     , persistent = False
     , isOpen = Nothing
-    , widthAttr = ( "width", "auto" )
+    , widthAttr = ( "width", "auto", True )
     , showOnHover = False
     , unstyled = False
     , htmlAttributes = []
@@ -180,13 +180,13 @@ full v =
 {-| -}
 width : Int -> Attribute msg
 width v =
-    Attribute <| \attrs -> { attrs | widthAttr = ( "width", String.fromInt v ++ "px" ) }
+    Attribute <| \attrs -> { attrs | widthAttr = ( "width", String.fromInt v ++ "px", True ) }
 
 
 {-| -}
 minWidth : Int -> Attribute msg
 minWidth v =
-    Attribute <| \attrs -> { attrs | widthAttr = ( "min-width", String.fromInt v ++ "px" ) }
+    Attribute <| \attrs -> { attrs | widthAttr = ( "min-width", String.fromInt v ++ "px", True ) }
 
 
 {-| -}
@@ -372,9 +372,13 @@ view attrs_ props =
             [ H.div
                 (attrs.htmlAttributes
                     ++ [ HA.class "ew-overflow-visible"
-                       , Theme.styles [ attrs.widthAttr ]
+                       , W.Theme.styleListIf
+                            [ attrs.widthAttr
+                            , ( "background", W.Theme.base.tintSubtle, not attrs.unstyled )
+                            , ( "border-color", W.Theme.base.borderSubtle, not attrs.unstyled )
+                            ]
                        , HA.classList
-                            [ ( "ew-bg-base-bg ew-rounded-sm ew-border-solid ew-border ew-border-base-aux/20 ew-shadow-lg", not attrs.unstyled )
+                            [ ( "ew-rounded-sm ew-border-solid ew-border ew-shadow-lg", not attrs.unstyled )
                             ]
                        ]
                 )

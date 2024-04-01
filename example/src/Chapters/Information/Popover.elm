@@ -154,7 +154,7 @@ chapter_ =
                         [ W.Container.view
                             [ W.Container.pad_4
                             , W.Container.shadow
-                            , W.Container.extraRounded
+                            , W.Container.rounded
                             , W.Container.background Theme.warningBackground
                             ]
                             [ W.Text.view [ W.Text.color Theme.warningForeground ] [ H.text "I'll only close when I want to." ] ]

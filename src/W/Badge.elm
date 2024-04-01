@@ -30,7 +30,7 @@ By default, badges appear in a **danger** color.
 
 import Html as H
 import Html.Attributes as HA
-import Theme
+import W.Theme
 
 
 
@@ -59,8 +59,8 @@ defaultAttrs : Attributes msg
 defaultAttrs =
     { htmlAttributes = []
     , small = False
-    , color = Theme.dangerAux
-    , background = Theme.dangerBackground
+    , color = W.Theme.danger.solidText
+    , background = W.Theme.danger.solid
     }
 
 
@@ -104,8 +104,8 @@ neutral =
     Attribute <|
         \attrs ->
             { attrs
-                | background = Theme.neutralBackground
-                , color = Theme.neutralAux
+                | background = W.Theme.base.solid
+                , color = W.Theme.base.solidText
             }
 
 
@@ -115,8 +115,8 @@ primary =
     Attribute <|
         \attrs ->
             { attrs
-                | background = Theme.primaryBackground
-                , color = Theme.primaryAux
+                | background = W.Theme.primary.solid
+                , color = W.Theme.primary.solidText
             }
 
 
@@ -126,8 +126,8 @@ secondary =
     Attribute <|
         \attrs ->
             { attrs
-                | background = Theme.secondaryBackground
-                , color = Theme.secondaryAux
+                | background = W.Theme.secondary.solid
+                , color = W.Theme.secondary.solidText
             }
 
 
@@ -137,8 +137,8 @@ success =
     Attribute <|
         \attrs ->
             { attrs
-                | background = Theme.successBackground
-                , color = Theme.successAux
+                | background = W.Theme.success.solid
+                , color = W.Theme.success.solidText
             }
 
 
@@ -148,8 +148,8 @@ warning =
     Attribute <|
         \attrs ->
             { attrs
-                | background = Theme.warningBackground
-                , color = Theme.warningAux
+                | background = W.Theme.warning.solid
+                , color = W.Theme.warning.solidText
             }
 
 
@@ -228,13 +228,13 @@ baseAttrs : Attributes msg -> List (H.Attribute msg)
 baseAttrs attrs =
     attrs.htmlAttributes
         ++ [ HA.class "ew-rounded-full ew-flex ew-items-center ew-justify-center"
-           , HA.class "ew-leading-none ew-font-semibold ew-font-text"
+           , HA.class "ew-leading-none ew-font-semibold"
            , HA.class "ew-shadow"
            , HA.classList
                 [ ( "ew-px-2.5 ew-h-6 ew-text-sm", not attrs.small )
                 , ( "ew-px-1.5 ew-h-4 ew-text-xs", attrs.small )
                 ]
-           , Theme.stylesIf
+           , W.Theme.styleListIf
                 [ ( "color", attrs.color, True )
                 , ( "background", attrs.background, True )
                 , ( "min-width", "5px", attrs.small )

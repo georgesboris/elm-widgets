@@ -37,7 +37,7 @@ By default, `neutral` color is used.
 import Html as H
 import Html.Attributes as HA
 import Html.Events as HE
-import Theme exposing (ThemeColorSetValues)
+import W.Theme
 
 
 
@@ -81,17 +81,23 @@ type ButtonWidth
 
 {-| -}
 type alias ButtonTheme =
-    { foreground : String
-    , background : String
-    , aux : String
+    { solid : String
+    , solidHover : String
+    , solidActive : String
+    , solidText : String
+    , tint : String
+    , text : String
     }
 
 
-toButtonTheme : ThemeColorSetValues -> ButtonTheme
+toButtonTheme : W.Theme.ThemeColorSetVariables -> ButtonTheme
 toButtonTheme color =
-    { foreground = color.foreground
-    , background = color.background
-    , aux = color.aux
+    { solid = color.solid
+    , solidHover = color.solidHover
+    , solidActive = color.solidActive
+    , solidText = color.solidText
+    , tint = color.tint
+    , text = color.text
     }
 
 
@@ -103,7 +109,7 @@ defaultAttrs =
     , rounded = False
     , width = Base
     , alignClass = "ew-justify-center"
-    , theme = toButtonTheme Theme.neutral
+    , theme = toButtonTheme W.Theme.base
     , htmlAttributes = []
     }
 
@@ -117,8 +123,8 @@ styleAttrs : Attributes msg -> List (H.Attribute msg)
 styleAttrs attrs =
     case attrs.style of
         Basic ->
-            [ HA.style "color" attrs.theme.aux
-            , HA.style "background" attrs.theme.background
+            [ HA.style "color" attrs.theme.solidText
+            , HA.style "background" attrs.theme.solid
             , HA.class "ew-border-0"
             , HA.class "before:ew-block before:ew-content-[''] before:ew-absolute before:ew-inset-0 before:ew-pointer-events-none"
             , HA.class "before:ew-z-0 before:ew-transition before:ew-duration-200 before:ew-bg-current before:ew-opacity-0"
@@ -126,9 +132,9 @@ styleAttrs attrs =
             ]
 
         Outlined ->
-            [ HA.style "color" attrs.theme.foreground
-            , HA.style "border-color" attrs.theme.foreground
-            , HA.style "background" Theme.baseBackground
+            [ HA.style "color" attrs.theme.solid
+            , HA.style "border-color" attrs.theme.solid
+            , HA.style "background" W.Theme.base.bg
             , HA.class "ew-border-solid ew-border-[3px]"
             , HA.class "before:ew-content-[''] before:ew-block before:ew-absolute before:ew-inset-0 before:ew-bg-current before:ew-opacity-0"
             , HA.class "hover:before:ew-opacity-10 active:before:ew-opacity-20 before:ew-transition before:ew-duration-200"
@@ -138,7 +144,7 @@ styleAttrs attrs =
             [ HA.class "ew-relative ew-bg-transparent ew-border-0"
             , HA.class "before:ew-content-[''] before:ew-block before:ew-absolute before:ew-inset-0 before:ew-bg-current before:ew-opacity-0"
             , HA.class "hover:before:ew-opacity-10 active:before:ew-opacity-20 before:ew-transition before:ew-duration-200"
-            , HA.style "color" attrs.theme.foreground
+            , HA.style "color" attrs.theme.text
             ]
 
 
@@ -305,31 +311,31 @@ disabled v =
 {-| -}
 primary : Attribute msg
 primary =
-    Attribute <| \attrs -> { attrs | theme = toButtonTheme Theme.primary }
+    Attribute <| \attrs -> { attrs | theme = toButtonTheme W.Theme.primary }
 
 
 {-| -}
 secondary : Attribute msg
 secondary =
-    Attribute <| \attrs -> { attrs | theme = toButtonTheme Theme.secondary }
+    Attribute <| \attrs -> { attrs | theme = toButtonTheme W.Theme.secondary }
 
 
 {-| -}
 success : Attribute msg
 success =
-    Attribute <| \attrs -> { attrs | theme = toButtonTheme Theme.success }
+    Attribute <| \attrs -> { attrs | theme = toButtonTheme W.Theme.success }
 
 
 {-| -}
 warning : Attribute msg
 warning =
-    Attribute <| \attrs -> { attrs | theme = toButtonTheme Theme.warning }
+    Attribute <| \attrs -> { attrs | theme = toButtonTheme W.Theme.warning }
 
 
 {-| -}
 danger : Attribute msg
 danger =
-    Attribute <| \attrs -> { attrs | theme = toButtonTheme Theme.danger }
+    Attribute <| \attrs -> { attrs | theme = toButtonTheme W.Theme.danger }
 
 
 {-| -}

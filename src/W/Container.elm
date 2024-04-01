@@ -62,7 +62,7 @@ module W.Container exposing
 
 import Html as H
 import Html.Attributes as HA
-import Theme
+import W.Theme
 
 
 
@@ -101,10 +101,10 @@ view attrs_ children =
         styleAttrs_ =
             case attrs.background of
                 Just background_ ->
-                    Theme.styles (( "background", background_ ) :: attrs.styles)
+                    W.Theme.styleList (( "background", background_ ) :: attrs.styles)
 
                 Nothing ->
-                    Theme.styles attrs.styles
+                    W.Theme.styleList attrs.styles
     in
     H.node
         attrs.node
@@ -249,7 +249,7 @@ fill =
 {-| -}
 card : Attribute msg
 card =
-    Attribute (\attr -> { attr | background = Just Theme.baseBackground, class = attr.class ++ " ew-shadow ew-rounded" })
+    Attribute (\attr -> { attr | background = Just W.Theme.base.bg, class = attr.class ++ " ew-shadow ew-rounded" })
 
 
 {-| Note that for `style` attributes you should use the [styleAttrs](https://package.elm-lang.org/packages/uncover-co/elm-widgets/latest/W-Container#styleAttrs) attribute instead.

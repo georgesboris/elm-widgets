@@ -24,8 +24,8 @@ import Html as H
 import Html.Attributes as HA
 import Svg as S
 import Svg.Attributes as SA
-import Theme
 import W.Internal.Helpers as WH
+import W.Theme
 
 
 
@@ -52,7 +52,7 @@ applyAttrs attrs =
 defaultAttrs : Attributes msg
 defaultAttrs =
     { size = 25
-    , color = Theme.baseAux
+    , color = W.Theme.base.solid
     , htmlAttributes = []
     }
 

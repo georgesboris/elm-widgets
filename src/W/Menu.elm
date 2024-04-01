@@ -31,6 +31,7 @@ import Html.Attributes as HA
 import Html.Events as HE
 import Theme
 import W.Internal.Helpers as WH
+import W.Theme
 
 
 
@@ -204,9 +205,11 @@ viewCustom attrs_ children =
             applyMenuAttrs attrs_
     in
     H.ul
-        [ HA.class "ew-m-0 ew-p-0 ew-w-full ew-list-none ew-bg-base-bg ew-font-text"
-        , Theme.styles
-            [ ( "--ew-menu-padding", paddingString attrs.padding )
+        [ HA.class "ew-m-0 ew-p-0 ew-w-full ew-list-none"
+        , W.Theme.styleList
+            [ ( "background", W.Theme.base.bg )
+            , ( "font-family", W.Theme.font.text )
+            , ( "--ew-menu-padding", paddingString attrs.padding )
             , ( "--ew-menu-title-padding", paddingString attrs.titlePadding )
             ]
         ]
@@ -235,9 +238,13 @@ viewTitle attrs_ props =
     in
     H.p
         [ HA.class "ew-m-0 ew-flex ew-items-center"
-        , HA.class "ew-uppercase ew-text-xs ew-font-bold ew-font-text ew-text-base-aux"
+        , HA.class "ew-uppercase ew-text-xs ew-font-bold"
         , if attrs.padding then
-            Theme.styles [ ( "padding", "var(--ew-menu-title-padding)" ) ]
+            W.Theme.styleList
+                [ ( "font-family", W.Theme.font.text )
+                , ( "color", W.Theme.base.textSubtle )
+                , ( "padding", "var(--ew-menu-title-padding)" )
+                ]
 
           else
             HA.class ""

@@ -1,7 +1,7 @@
 module W.Message exposing
     ( view
     , icon, footer
-    , primary, secondary, success, warning, danger, color
+    , primary, secondary, success, warning, danger, theme
     , href, onClick
     , htmlAttrs, noAttr, Attribute
     )
@@ -18,7 +18,7 @@ module W.Message exposing
 
 # Styles
 
-@docs primary, secondary, success, warning, danger, color
+@docs primary, secondary, success, warning, danger, theme
 
 
 # Actions
@@ -35,8 +35,8 @@ module W.Message exposing
 import Html as H
 import Html.Attributes as HA
 import Html.Events as HE
-import Theme
 import W.Internal.Helpers as WH
+import W.Theme
 
 
 
@@ -52,7 +52,7 @@ type alias Attributes msg =
     { htmlAttributes : List (H.Attribute msg)
     , icon : Maybe (List (H.Html msg))
     , footer : Maybe (List (H.Html msg))
-    , color : String
+    , theme : { text : String, solid : String, tint : String }
     , href : Maybe String
     , onClick : Maybe msg
     }
@@ -68,9 +68,17 @@ defaultAttrs =
     { htmlAttributes = []
     , icon = Nothing
     , footer = Nothing
-    , color = Theme.neutralForeground
+    , theme = toTheme W.Theme.base
     , href = Nothing
     , onClick = Nothing
+    }
+
+
+toTheme : { a | text : String, solid : String, tint : String } -> { text : String, solid : String, tint : String }
+toTheme t =
+    { text = t.text
+    , solid = t.solid
+    , tint = t.tint
     }
 
 
@@ -115,9 +123,9 @@ footer v =
 
 
 {-| -}
-color : String -> Attribute msg
-color v =
-    Attribute <| \attrs -> { attrs | color = v }
+theme : { a | text : String, solid : String, tint : String } -> Attribute msg
+theme v =
+    Attribute <| \attrs -> { attrs | theme = toTheme v }
 
 
 {-| -}
@@ -125,7 +133,7 @@ primary : Attribute msg
 primary =
     Attribute <|
         \attrs ->
-            { attrs | color = Theme.primaryForeground }
+            { attrs | theme = toTheme W.Theme.primary }
 
 
 {-| -}
@@ -133,7 +141,7 @@ secondary : Attribute msg
 secondary =
     Attribute <|
         \attrs ->
-            { attrs | color = Theme.secondaryForeground }
+            { attrs | theme = toTheme W.Theme.secondary }
 
 
 {-| -}
@@ -141,7 +149,7 @@ success : Attribute msg
 success =
     Attribute <|
         \attrs ->
-            { attrs | color = Theme.successForeground }
+            { attrs | theme = toTheme W.Theme.success }
 
 
 {-| -}
@@ -149,7 +157,7 @@ warning : Attribute msg
 warning =
     Attribute <|
         \attrs ->
-            { attrs | color = Theme.warningForeground }
+            { attrs | theme = toTheme W.Theme.warning }
 
 
 {-| -}
@@ -157,7 +165,7 @@ danger : Attribute msg
 danger =
     Attribute <|
         \attrs ->
-            { attrs | color = Theme.dangerForeground }
+            { attrs | theme = toTheme W.Theme.danger }
 
 
 
@@ -180,14 +188,18 @@ view attrs_ children_ =
             attrs.htmlAttributes
                 ++ [ HA.class "ew-m-0 ew-box-border ew-relative"
                    , HA.class "ew-flex ew-gap-4 ew-w-full"
-                   , HA.class "ew-font-text ew-text-base ew-font-medium"
+                   , HA.class "ew-text-base ew-font-medium"
                    , HA.class "ew-py-2 ew-px-4 ew-pr-6"
-                   , HA.class "ew-bg-base-bg ew-rounded"
+                   , HA.class "ew-rounded"
                    , HA.class "ew-border-l-[6px] ew-border-0 ew-border-solid ew-border-current"
-                   , HA.style "color" attrs.color
                    , HA.class "before:ew-block before:ew-content-['']"
                    , HA.class "before:ew-absolute before:ew-inset-0 ew-z-0"
                    , HA.class "before:ew-rounded-r before:ew-bg-current before:ew-opacity-[0.07]"
+                   , W.Theme.styleList
+                        [ ( "font-family", W.Theme.font.text )
+                        , ( "background", W.Theme.base.bg )
+                        , ( "color", attrs.theme.solid )
+                        ]
                    ]
 
         children : List (H.Html msg)

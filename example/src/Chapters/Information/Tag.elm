@@ -17,7 +17,7 @@ chapter_ =
              , ( [ W.Tag.success ], "Success" )
              , ( [ W.Tag.warning ], "Warning" )
              , ( [ W.Tag.danger ], "Danger" )
-             , ( [ W.Tag.color "purple" ], "Custom" )
+             , ( [ W.Tag.color { background = "rgba(255,100,200, 0.2)", text = "purple" } ], "Custom" )
              ]
                 |> List.map
                     (\( attrs, label ) ->
